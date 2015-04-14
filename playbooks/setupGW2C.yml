@@ -6,4 +6,5 @@
       action: setup
   roles:
     - httpd
-  #  - mysql
+    - mysql
+    - php
