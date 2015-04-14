@@ -1,0 +1,9 @@
+---
+- name: basic setup
+  hosts: localhost
+  tasks:
+    - name: test connection
+      action: setup
+  roles:
+    - httpd
+  #  - mysql

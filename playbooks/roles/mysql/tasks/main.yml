@@ -1,0 +1,23 @@
+---
+- name: install mysql
+  action: '{{ ansible_pkg_mgr }} name={{ item }} state=latest'
+  with_items:
+    - mysql-server
+    - MySQL-python
+
+- name: ensure mysql is running
+  service: name={{ item }} state=running enabled=yes
+  with_items:
+    - mysqld
+
+- name: create automysqlbackup backupdir
+  file: dest={{ mysql.path }} state=directory recurse=yes owner=root group=root mode=0740
+
+- name: create automysqlbackup cronjob
+  cron: name="automysqlbackup" minute="30" hour="3" job={{ mysql.script }}
+
+- name: put automysqlbackupscript
+  copy: src=automysqlbackup dest={{ mysql.script }} mode=0755 owner=root group=root
+
+- name: configure automysqlbackup if needed
+  template: src=automysqlbackup.conf.in dest={{ mysql.config }} mode=0640 owner=root group=root backup=yes

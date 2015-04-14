@@ -1,0 +1,13 @@
+---
+- name: install required packages
+  action: yum
+  args:
+    name: httpd
+    state: installed
+
+- name: Hide servertokens
+  template: src=httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf owner=root group=root mode=0644
+  notify: restart httpd
+
+- name: start apache
+  service: name=httpd state=started enabled=yes

@@ -1,0 +1,7 @@
+---
+mysql:
+  script: /opt/automysqlbackup
+  config: /opt/automysqlbackup.conf
+  path: /opt/mysql
+  email: admin@gw2community.com
+
