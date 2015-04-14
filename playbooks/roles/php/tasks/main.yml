@@ -3,17 +3,17 @@
   action: '{{ ansible_pkg_mgr }} name={{ item }} state=latest'
   with_items:
     - php
-    - php56w
-    - php56w-opcache
+    #- php56w
+    #- php56w-opcache
     - php-mysql
     - php-common
     - php-curl
     - php-mbstring
     - php-xml
     - php-gd
-    - php-mysqlnd
+    #- php-mysqlnd
     - php-pear
     - php-pecl-memcached
     - php-xmlrpc
     - php-pclzip
-  notify: restart httpd
+  notify: restart httpd.service

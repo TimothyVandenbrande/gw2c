@@ -2,13 +2,14 @@
 - name: install mysql
   action: '{{ ansible_pkg_mgr }} name={{ item }} state=latest'
   with_items:
-    - mysql-server
+    #- mysql-server
+    - mariadb-server
     - MySQL-python
 
 - name: ensure mysql is running
   service: name={{ item }} state=running enabled=yes
   with_items:
-    - mysqld
+    - mariadb.service
 
 - name: create automysqlbackup backupdir
   file: dest={{ mysql.path }} state=directory recurse=yes owner=root group=root mode=0740
